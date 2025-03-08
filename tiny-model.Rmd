@@ -28,6 +28,8 @@ ggplot(crickets, aes(x = rate)) +
   ggtitle("Distribution of the chirp rate of crickets") +
   xlab('Chirp rate (per min.)')
 ```
+```
+
 
 ```{r}
 ggplot(crickets, aes(x = temp, y = rate)) +
@@ -35,7 +37,7 @@ ggplot(crickets, aes(x = temp, y = rate)) +
   geom_smooth(method = 'lm') +
   ggtitle("Plot of temperature and chirp rate") +
   ylab('Chirp rate (per min.)') +
-  xlab('Temperature (Celsius)')
+  xlab('Temperature (Cels.)')
 
 ```
 ```{r}
