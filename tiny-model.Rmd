@@ -1,0 +1,115 @@
+---
+title: "tiny-model"
+author: "Kimberly Vargas"
+date: "2025-02-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library('tidyverse') ; library('modeldata')
+
+```
+
+
+
+```{r}
+install.packages("modeldata") 
+```
+
+
+
+```{r load data, include = FALSE}
+data(crickets, package = "modeldata")
+names(crickets)
+```
+
+```{r summary, echo = FALSE}
+summary(crickets)
+ggplot(crickets, aes(x = rate)) +
+  geom_histogram(bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets") +
+  xlab('Chirp rate (per min.)')
+```
+```
+
+
+```{r}
+ggplot(crickets, aes(x = temp, y = rate)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Cels.)')
+
+```
+```{r}
+ggplot(crickets, aes(x = temp, y = rate)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+
+temp_lm <- lm(rate ~ temp, crickets)
+
+summary.lm(temp_lm)
+
+```
+
+```{r}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+
+```
+
+```{r}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+
+species_lm <- lm(rate ~ temp + species, crickets)
+
+summary.lm(species_lm)
+
+```
+
+```{r}
+ggplot(crickets, aes(x = rate, fill = species)) +
+  geom_histogram(position = 'identity', alpha = 0.7, bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets") +
+  xlab('Chirp rate (per min.)')
+
+```
+```{r}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+
+species_x_temp_lm <- lm(rate ~ temp + species + temp:species, crickets) 
+summary.lm(species_x_temp_lm)
+
+anova(species_lm, species_x_temp_lm)
+
+```
+```{r}
+library(ggplot2)
+data(diamonds)
+```
+
+```{r}
+diamond_lm <- lm(price ~ carat + cut + color, data = diamonds)
+
+summary(diamond_lm)
+```
+
